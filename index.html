@@ -3,194 +3,165 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>NEXURAA — The Future on Your Wrist</title>
-  <meta name="description" content="NEXURAA smart band. Precision health tracking, holographic display, 21-day battery. Experience the future on your wrist." />
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect x='4' y='4' width='24' height='24' rx='7' fill='%2322d3ee'/%3E%3Crect x='10' y='10' width='12' height='12' rx='3' fill='%2305060a'/%3E%3C/svg%3E" />
+  <title>KAIROS — Haute Horlogerie</title>
+  <meta name="description" content="KAIROS. Mechanical watchmaking for the decisive moment. Discover the Aperture, Abyss, Monolith and Machina collections." />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23111'/%3E%3Ctext x='16' y='22' font-family='Georgia' font-size='18' fill='%23fff' text-anchor='middle'%3EK%3C/text%3E%3C/svg%3E" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,300..900&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
 
-  <!-- ambient background glows -->
-  <div class="bg-glow bg-glow--cyan"></div>
-  <div class="bg-glow bg-glow--violet"></div>
-  <div class="bg-grid"></div>
-
   <!-- ============ NAV ============ -->
-  <header class="nav">
-    <a class="nav__logo" href="#top">
-      <span class="nav__logo-mark"></span>
-      NEXURAA
-    </a>
+  <header class="nav" id="top">
+    <a class="nav__logo" href="#top">KAIROS</a>
     <nav class="nav__links">
-      <a href="#features">Features</a>
-      <a href="#tech">Technology</a>
-      <a href="#specs">Specs</a>
+      <a href="#collections">Collections</a>
+      <a href="#engineering">Engineering</a>
+      <a href="#detail">Boutique</a>
+      <a href="#craft">Maison</a>
     </nav>
-    <a class="btn btn--ghost nav__cta" href="#preorder">Pre-order</a>
-    <button class="nav__burger" id="burger" aria-label="Menu">
-      <span></span><span></span><span></span>
-    </button>
+    <div class="nav__icons">
+      <button aria-label="Search">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.8-3.8"/></svg>
+      </button>
+      <button aria-label="Wishlist">
+        <svg viewBox="0 0 24 24"><path d="M12 20.5C5 15.5 3 12 3 8.9 3 6.2 5.2 4 7.9 4c1.7 0 3.2.8 4.1 2.1C12.9 4.8 14.4 4 16.1 4 18.8 4 21 6.2 21 8.9c0 3.1-2 6.6-9 11.6z"/></svg>
+      </button>
+      <button aria-label="Account">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c1.5-3.5 4.5-5 8-5s6.5 1.5 8 5"/></svg>
+      </button>
+    </div>
+    <button class="nav__burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
   </header>
 
-  <!-- ============ HERO ============ -->
-  <main id="top">
-    <section class="hero">
-      <div class="hero__copy">
-        <p class="hero__eyebrow reveal">
-          <span class="pulse-dot"></span> Introducing Nexuraa One
-        </p>
-        <h1 class="hero__title reveal">
-          The future,<br />
-          <span class="hero__title-gradient">on your wrist.</span>
-        </h1>
-        <p class="hero__sub reveal">
-          A featherweight smart band with a holographic edge display,
-          medical-grade biosensing and 21 days of battery.
-          Designed to disappear — until you need it.
-        </p>
-        <div class="hero__actions reveal">
-          <a class="btn btn--primary" href="#preorder">Pre-order — $299</a>
-          <a class="btn btn--ghost" href="#features">Explore features</a>
-        </div>
-        <ul class="hero__stats reveal">
-          <li><strong>21<span>days</span></strong><small>battery life</small></li>
-          <li><strong>0.9<span>mm</span></strong><small>edge display</small></li>
-          <li><strong>14<span>g</span></strong><small>total weight</small></li>
-        </ul>
-      </div>
+  <!-- ============ HERO CAROUSEL ============ -->
+  <section class="hero" id="collections">
+    <div class="hero__slides" id="slides"><!-- slides injected by JS --></div>
 
-      <div class="hero__stage">
-        <canvas id="wrist-canvas" aria-label="3D wrist wearing the Nexuraa smart band"></canvas>
-        <div class="hero__stage-ring"></div>
-        <div class="hero__hint">drag to rotate · scroll to explore</div>
-      </div>
-    </section>
+    <div class="hero__panel" id="heroPanel"></div>
 
-    <!-- ============ MARQUEE ============ -->
-    <div class="marquee" aria-hidden="true">
-      <div class="marquee__track">
-        <span>HOLOGRAPHIC DISPLAY</span><i>◆</i>
-        <span>ECG + SPO₂ + HRV</span><i>◆</i>
-        <span>TITANIUM CORE</span><i>◆</i>
-        <span>21-DAY BATTERY</span><i>◆</i>
-        <span>5ATM WATERPROOF</span><i>◆</i>
-        <span>HOLOGRAPHIC DISPLAY</span><i>◆</i>
-        <span>ECG + SPO₂ + HRV</span><i>◆</i>
-        <span>TITANIUM CORE</span><i>◆</i>
-        <span>21-DAY BATTERY</span><i>◆</i>
-        <span>5ATM WATERPROOF</span><i>◆</i>
+    <div class="hero__ui">
+      <div class="hero__dots" id="dots"></div>
+      <div class="hero__arrows">
+        <button id="prevBtn" aria-label="Previous model">&#8249;</button>
+        <button id="nextBtn" aria-label="Next model">&#8250;</button>
       </div>
     </div>
 
-    <!-- ============ FEATURES ============ -->
-    <section class="section" id="features">
-      <p class="section__eyebrow reveal">Capabilities</p>
-      <h2 class="section__title reveal">Engineered around<br />your pulse.</h2>
-      <div class="cards">
-        <article class="card reveal">
-          <div class="card__icon">◉</div>
-          <h3>Biosense Array</h3>
-          <p>Eight optical and electrical sensors read heart rhythm, blood oxygen and skin temperature — continuously, invisibly.</p>
-        </article>
-        <article class="card reveal">
-          <div class="card__icon">◈</div>
-          <h3>Edge Hologram</h3>
-          <p>A 0.9&nbsp;mm micro-LED strip projects notifications along the band's edge. Glance without breaking stride.</p>
-        </article>
-        <article class="card reveal">
-          <div class="card__icon">◎</div>
-          <h3>Adaptive AI Coach</h3>
-          <p>On-device intelligence learns your rhythms and nudges recovery, focus and sleep at exactly the right moment.</p>
-        </article>
-        <article class="card reveal">
-          <div class="card__icon">◇</div>
-          <h3>Ghost Battery</h3>
-          <p>Three weeks per charge. Kinetic top-up recovers a full day of power from a single morning walk.</p>
-        </article>
-      </div>
-    </section>
+    <div class="hero__counter"><span id="slideIndex">01</span><i>/</i><span id="slideTotal">04</span></div>
+  </section>
 
-    <!-- ============ TECH SPLIT ============ -->
-    <section class="section split" id="tech">
-      <div class="split__visual reveal">
-        <div class="split__orb"></div>
-        <div class="split__card">
-          <div class="split__row"><span>Heart rate</span><strong>62 <em>bpm</em></strong></div>
-          <div class="split__wave"><svg viewBox="0 0 200 40" preserveAspectRatio="none"><path d="M0,20 L30,20 38,6 46,34 54,20 90,20 98,10 106,30 114,20 150,20 158,4 166,36 174,20 200,20" fill="none" stroke="url(#wg)" stroke-width="2"/><defs><linearGradient id="wg" x1="0" x2="1"><stop offset="0" stop-color="#22d3ee"/><stop offset="1" stop-color="#a78bfa"/></linearGradient></defs></svg></div>
-          <div class="split__row"><span>SpO₂</span><strong>99<em>%</em></strong></div>
-          <div class="split__row"><span>Recovery</span><strong>94<em>/100</em></strong></div>
+  <!-- ============ ENGINEERING / EXPLODED VIDEO ============ -->
+  <section class="engineering" id="engineering">
+    <div class="engineering__head">
+      <p class="eyebrow eyebrow--light reveal">In-house calibre K-01</p>
+      <h2 class="display display--light reveal">Engineered<br />to defy time.</h2>
+      <p class="engineering__copy reveal">
+        Two hundred and fourteen components. Assembled by hand,
+        regulated in five positions. Every KAIROS movement is a
+        machine built to outlive its maker.
+      </p>
+    </div>
+    <div class="engineering__media reveal" id="explodedMedia">
+      <video id="explodedVideo" muted loop playsinline preload="metadata" poster="">
+        <!-- source injected by JS -->
+      </video>
+      <img id="explodedImage" alt="Exploded view of the KAIROS K-01 calibre" loading="lazy" />
+    </div>
+    <ul class="engineering__stats">
+      <li class="reveal"><strong>214</strong><span>components</span></li>
+      <li class="reveal"><strong>96h</strong><span>power reserve</span></li>
+      <li class="reveal"><strong>28,800</strong><span>vph frequency</span></li>
+      <li class="reveal"><strong>±2s</strong><span>daily deviation</span></li>
+    </ul>
+  </section>
+
+  <!-- ============ PRODUCT DETAIL SPLIT ============ -->
+  <section class="detail" id="detail">
+    <div class="detail__visual">
+      <img src="" alt="" id="detailImage" loading="lazy" />
+      <div class="detail__visual-tools">
+        <button aria-label="Zoom">⤢</button>
+        <button aria-label="Rotate">↻</button>
+      </div>
+    </div>
+    <div class="detail__info">
+      <p class="eyebrow reveal">Aperture Collection</p>
+      <h2 class="detail__title reveal">Aperture<br />Skeleton</h2>
+      <p class="detail__ref reveal">42&nbsp;MM · GRADE-5 TITANIUM · REF. KAI-0142T</p>
+
+      <div class="detail__row-group reveal">
+        <div class="detail__meta">
+          <button class="detail__meta-btn">♡ Add to wishlist</button>
+          <button class="detail__meta-btn">↗ Share</button>
+        </div>
+        <div class="detail__buy">
+          <button class="detail__cta">Add to bag</button>
+          <p class="detail__price">£12,400<span>incl. sales tax</span></p>
         </div>
       </div>
-      <div class="split__copy">
-        <p class="section__eyebrow reveal">Technology</p>
-        <h2 class="section__title reveal">Clinical accuracy.<br />Zero effort.</h2>
-        <p class="split__text reveal">
-          The Nexuraa biosense array samples 400 times per second and runs its models
-          entirely on-device. Your data never leaves your wrist unless you say so.
-        </p>
-        <ul class="split__list">
-          <li class="reveal">FDA-cleared ECG &amp; AFib detection</li>
-          <li class="reveal">Sleep staging with 96% lab agreement</li>
-          <li class="reveal">End-to-end encrypted, on-device AI</li>
-        </ul>
-      </div>
-    </section>
 
-    <!-- ============ SPECS ============ -->
-    <section class="section" id="specs">
-      <p class="section__eyebrow reveal">Specifications</p>
-      <h2 class="section__title reveal">Small numbers.<br />Big consequences.</h2>
-      <div class="specs">
-        <div class="specs__item reveal"><span>Weight</span><strong>14 g</strong></div>
-        <div class="specs__item reveal"><span>Battery</span><strong>21 days</strong></div>
-        <div class="specs__item reveal"><span>Display</span><strong>Micro-LED edge</strong></div>
-        <div class="specs__item reveal"><span>Water resistance</span><strong>5 ATM</strong></div>
-        <div class="specs__item reveal"><span>Chassis</span><strong>Grade-5 titanium</strong></div>
-        <div class="specs__item reveal"><span>Sensors</span><strong>8-channel biosense</strong></div>
-        <div class="specs__item reveal"><span>Connectivity</span><strong>BT 6.0 · NFC · UWB</strong></div>
-        <div class="specs__item reveal"><span>Charging</span><strong>Magnetic + kinetic</strong></div>
-      </div>
-    </section>
+      <ul class="detail__links">
+        <li class="reveal"><a href="#"><i>ⓘ</i> Technical details</a></li>
+        <li class="reveal"><a href="#"><i>◎</i> Find your nearest boutique</a></li>
+        <li class="reveal"><a href="#"><i>▤</i> Make an appointment</a></li>
+        <li class="reveal"><a href="#"><i>✦</i> Product warranty — 8 years</a></li>
+        <li class="reveal"><a href="#"><i>↓</i> Download instruction</a></li>
+      </ul>
+    </div>
+  </section>
 
-    <!-- ============ CTA ============ -->
-    <section class="cta" id="preorder">
-      <div class="cta__inner reveal">
-        <h2>Be first in line.</h2>
-        <p>Reserve Nexuraa One today. Fully refundable, ships early 2027.</p>
-        <form class="cta__form" onsubmit="event.preventDefault(); this.querySelector('button').textContent='✓ Reserved'; this.querySelector('button').disabled=true;">
-          <input type="email" required placeholder="you@example.com" aria-label="Email address" />
-          <button class="btn btn--primary" type="submit">Reserve — $49</button>
-        </form>
-        <small>No spam. One email when your unit is ready.</small>
-      </div>
-    </section>
-  </main>
+  <!-- ============ COLLECTION GRID ============ -->
+  <section class="grid-section" id="craft">
+    <p class="eyebrow reveal">The Collections</p>
+    <h2 class="display reveal">Four expressions.<br />One obsession.</h2>
+    <div class="watch-grid" id="watchGrid"><!-- cards injected by JS --></div>
+  </section>
+
+  <!-- ============ MANIFESTO ============ -->
+  <section class="manifesto">
+    <p class="manifesto__text reveal">
+      “Kairos — the ancient Greek word for the fleeting instant
+      in which everything changes. We build the machines
+      that let you <em>recognise it</em>.”
+    </p>
+    <p class="manifesto__sign reveal">— The KAIROS Manufacture</p>
+  </section>
 
   <!-- ============ FOOTER ============ -->
   <footer class="footer">
-    <div class="footer__brand">
-      <span class="nav__logo-mark"></span> NEXURAA
+    <div class="footer__top">
+      <div class="footer__brand">KAIROS</div>
+      <div class="footer__cols">
+        <div>
+          <h4>Collections</h4>
+          <a href="#collections">Aperture</a>
+          <a href="#collections">Abyss</a>
+          <a href="#collections">Monolith</a>
+          <a href="#collections">Machina</a>
+        </div>
+        <div>
+          <h4>Maison</h4>
+          <a href="#craft">Manufacture</a>
+          <a href="#engineering">Movements</a>
+          <a href="#">Heritage</a>
+        </div>
+        <div>
+          <h4>Services</h4>
+          <a href="#">Care &amp; warranty</a>
+          <a href="#">Boutiques</a>
+          <a href="#">Contact</a>
+        </div>
+      </div>
     </div>
-    <nav class="footer__links">
-      <a href="#features">Features</a>
-      <a href="#tech">Technology</a>
-      <a href="#specs">Specs</a>
-      <a href="#preorder">Pre-order</a>
-    </nav>
-    <p class="footer__legal">© 2026 Nexuraa Labs. All rights reserved.</p>
+    <div class="footer__bottom">
+      <p>© 2026 KAIROS Manufacture. Concept design.</p>
+      <p>Geneva · London · Tokyo</p>
+    </div>
   </footer>
 
-  <script type="importmap">
-    {
-      "imports": {
-        "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
-        "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
-      }
-    }
-  </script>
-  <script type="module" src="js/main.js"></script>
+  <script src="js/main.js"></script>
 </body>
 </html>
