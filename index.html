@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NEXURAA — The Future on Your Wrist</title>
+  <meta name="description" content="NEXURAA smart band. Precision health tracking, holographic display, 21-day battery. Experience the future on your wrist." />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect x='4' y='4' width='24' height='24' rx='7' fill='%2322d3ee'/%3E%3Crect x='10' y='10' width='12' height='12' rx='3' fill='%2305060a'/%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- ambient background glows -->
+  <div class="bg-glow bg-glow--cyan"></div>
+  <div class="bg-glow bg-glow--violet"></div>
+  <div class="bg-grid"></div>
+
+  <!-- ============ NAV ============ -->
+  <header class="nav">
+    <a class="nav__logo" href="#top">
+      <span class="nav__logo-mark"></span>
+      NEXURAA
+    </a>
+    <nav class="nav__links">
+      <a href="#features">Features</a>
+      <a href="#tech">Technology</a>
+      <a href="#specs">Specs</a>
+    </nav>
+    <a class="btn btn--ghost nav__cta" href="#preorder">Pre-order</a>
+    <button class="nav__burger" id="burger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </header>
+
+  <!-- ============ HERO ============ -->
+  <main id="top">
+    <section class="hero">
+      <div class="hero__copy">
+        <p class="hero__eyebrow reveal">
+          <span class="pulse-dot"></span> Introducing Nexuraa One
+        </p>
+        <h1 class="hero__title reveal">
+          The future,<br />
+          <span class="hero__title-gradient">on your wrist.</span>
+        </h1>
+        <p class="hero__sub reveal">
+          A featherweight smart band with a holographic edge display,
+          medical-grade biosensing and 21 days of battery.
+          Designed to disappear — until you need it.
+        </p>
+        <div class="hero__actions reveal">
+          <a class="btn btn--primary" href="#preorder">Pre-order — $299</a>
+          <a class="btn btn--ghost" href="#features">Explore features</a>
+        </div>
+        <ul class="hero__stats reveal">
+          <li><strong>21<span>days</span></strong><small>battery life</small></li>
+          <li><strong>0.9<span>mm</span></strong><small>edge display</small></li>
+          <li><strong>14<span>g</span></strong><small>total weight</small></li>
+        </ul>
+      </div>
+
+      <div class="hero__stage">
+        <canvas id="wrist-canvas" aria-label="3D wrist wearing the Nexuraa smart band"></canvas>
+        <div class="hero__stage-ring"></div>
+        <div class="hero__hint">drag to rotate · scroll to explore</div>
+      </div>
+    </section>
+
+    <!-- ============ MARQUEE ============ -->
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee__track">
+        <span>HOLOGRAPHIC DISPLAY</span><i>◆</i>
+        <span>ECG + SPO₂ + HRV</span><i>◆</i>
+        <span>TITANIUM CORE</span><i>◆</i>
+        <span>21-DAY BATTERY</span><i>◆</i>
+        <span>5ATM WATERPROOF</span><i>◆</i>
+        <span>HOLOGRAPHIC DISPLAY</span><i>◆</i>
+        <span>ECG + SPO₂ + HRV</span><i>◆</i>
+        <span>TITANIUM CORE</span><i>◆</i>
+        <span>21-DAY BATTERY</span><i>◆</i>
+        <span>5ATM WATERPROOF</span><i>◆</i>
+      </div>
+    </div>
+
+    <!-- ============ FEATURES ============ -->
+    <section class="section" id="features">
+      <p class="section__eyebrow reveal">Capabilities</p>
+      <h2 class="section__title reveal">Engineered around<br />your pulse.</h2>
+      <div class="cards">
+        <article class="card reveal">
+          <div class="card__icon">◉</div>
+          <h3>Biosense Array</h3>
+          <p>Eight optical and electrical sensors read heart rhythm, blood oxygen and skin temperature — continuously, invisibly.</p>
+        </article>
+        <article class="card reveal">
+          <div class="card__icon">◈</div>
+          <h3>Edge Hologram</h3>
+          <p>A 0.9&nbsp;mm micro-LED strip projects notifications along the band's edge. Glance without breaking stride.</p>
+        </article>
+        <article class="card reveal">
+          <div class="card__icon">◎</div>
+          <h3>Adaptive AI Coach</h3>
+          <p>On-device intelligence learns your rhythms and nudges recovery, focus and sleep at exactly the right moment.</p>
+        </article>
+        <article class="card reveal">
+          <div class="card__icon">◇</div>
+          <h3>Ghost Battery</h3>
+          <p>Three weeks per charge. Kinetic top-up recovers a full day of power from a single morning walk.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- ============ TECH SPLIT ============ -->
+    <section class="section split" id="tech">
+      <div class="split__visual reveal">
+        <div class="split__orb"></div>
+        <div class="split__card">
+          <div class="split__row"><span>Heart rate</span><strong>62 <em>bpm</em></strong></div>
+          <div class="split__wave"><svg viewBox="0 0 200 40" preserveAspectRatio="none"><path d="M0,20 L30,20 38,6 46,34 54,20 90,20 98,10 106,30 114,20 150,20 158,4 166,36 174,20 200,20" fill="none" stroke="url(#wg)" stroke-width="2"/><defs><linearGradient id="wg" x1="0" x2="1"><stop offset="0" stop-color="#22d3ee"/><stop offset="1" stop-color="#a78bfa"/></linearGradient></defs></svg></div>
+          <div class="split__row"><span>SpO₂</span><strong>99<em>%</em></strong></div>
+          <div class="split__row"><span>Recovery</span><strong>94<em>/100</em></strong></div>
+        </div>
+      </div>
+      <div class="split__copy">
+        <p class="section__eyebrow reveal">Technology</p>
+        <h2 class="section__title reveal">Clinical accuracy.<br />Zero effort.</h2>
+        <p class="split__text reveal">
+          The Nexuraa biosense array samples 400 times per second and runs its models
+          entirely on-device. Your data never leaves your wrist unless you say so.
+        </p>
+        <ul class="split__list">
+          <li class="reveal">FDA-cleared ECG &amp; AFib detection</li>
+          <li class="reveal">Sleep staging with 96% lab agreement</li>
+          <li class="reveal">End-to-end encrypted, on-device AI</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ============ SPECS ============ -->
+    <section class="section" id="specs">
+      <p class="section__eyebrow reveal">Specifications</p>
+      <h2 class="section__title reveal">Small numbers.<br />Big consequences.</h2>
+      <div class="specs">
+        <div class="specs__item reveal"><span>Weight</span><strong>14 g</strong></div>
+        <div class="specs__item reveal"><span>Battery</span><strong>21 days</strong></div>
+        <div class="specs__item reveal"><span>Display</span><strong>Micro-LED edge</strong></div>
+        <div class="specs__item reveal"><span>Water resistance</span><strong>5 ATM</strong></div>
+        <div class="specs__item reveal"><span>Chassis</span><strong>Grade-5 titanium</strong></div>
+        <div class="specs__item reveal"><span>Sensors</span><strong>8-channel biosense</strong></div>
+        <div class="specs__item reveal"><span>Connectivity</span><strong>BT 6.0 · NFC · UWB</strong></div>
+        <div class="specs__item reveal"><span>Charging</span><strong>Magnetic + kinetic</strong></div>
+      </div>
+    </section>
+
+    <!-- ============ CTA ============ -->
+    <section class="cta" id="preorder">
+      <div class="cta__inner reveal">
+        <h2>Be first in line.</h2>
+        <p>Reserve Nexuraa One today. Fully refundable, ships early 2027.</p>
+        <form class="cta__form" onsubmit="event.preventDefault(); this.querySelector('button').textContent='✓ Reserved'; this.querySelector('button').disabled=true;">
+          <input type="email" required placeholder="you@example.com" aria-label="Email address" />
+          <button class="btn btn--primary" type="submit">Reserve — $49</button>
+        </form>
+        <small>No spam. One email when your unit is ready.</small>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="footer">
+    <div class="footer__brand">
+      <span class="nav__logo-mark"></span> NEXURAA
+    </div>
+    <nav class="footer__links">
+      <a href="#features">Features</a>
+      <a href="#tech">Technology</a>
+      <a href="#specs">Specs</a>
+      <a href="#preorder">Pre-order</a>
+    </nav>
+    <p class="footer__legal">© 2026 Nexuraa Labs. All rights reserved.</p>
+  </footer>
+
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+        "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+      }
+    }
+  </script>
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>
