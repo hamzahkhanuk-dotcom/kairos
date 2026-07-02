@@ -45,7 +45,8 @@ const WATCHES = [
 
 /* Exploded engineering media — image now, video swapped in when ready */
 const EXPLODED_IMAGE = `${CDN}/hf_20260702_131231_67e9f776-5cdf-4fc6-a46e-f2463d486b86.png`;
-const EXPLODED_VIDEO = `${CDN}/hf_20260702_131620_568d46a2-29c7-409f-ae7f-3cce5e6e3436.mp4`;
+const EXPLODED_VIDEO = `${CDN}/hf_20260702_132503_ae6df21c-ed64-49d8-add3-b9d1c34d0c72.mp4`;
+const EXPLODED_POSTER = `${CDN}/hf_20260702_132346_fde47a2a-ddf5-45f6-ad86-cc28099e9f40.png`;
 
 /* ------------------------------------------------------------
    Build hero slides + dots
@@ -138,6 +139,7 @@ const video = document.getElementById("explodedVideo");
 document.getElementById("explodedImage").src = EXPLODED_IMAGE;
 
 if (EXPLODED_VIDEO) {
+  video.poster = EXPLODED_POSTER;
   const src = document.createElement("source");
   src.src = EXPLODED_VIDEO;
   src.type = "video/mp4";
