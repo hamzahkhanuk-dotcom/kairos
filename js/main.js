@@ -54,11 +54,24 @@ const EXPLODED_POSTER = `${CDN}/hf_20260702_132346_fde47a2a-ddf5-45f6-ad86-cc280
 const slidesEl = document.getElementById("slides");
 const dotsEl = document.getElementById("dots");
 const idxEl = document.getElementById("slideIndex");
-/* brush-stroke mask — the watch is "painted" onto the stage stroke by stroke */
+/* brush-stroke mask — a pencil "sketch" ghost is scribbled in first,
+   then the full watch is painted over it stroke by stroke */
 function brushArt(i, url, name) {
   return `
   <svg class="slide__art" viewBox="0 0 900 1200" role="img" aria-label="KAIROS ${name}">
     <defs>
+      <mask id="sketch${i}" maskUnits="userSpaceOnUse">
+        <rect width="900" height="1200" fill="#000" />
+        <g class="scribbles" fill="none" stroke="#fff" stroke-linecap="round">
+          <path pathLength="1000" stroke-width="80" d="M-60,80 C300,10 560,170 960,60 C600,150 340,40 -60,140" />
+          <path pathLength="1000" stroke-width="85" d="M960,240 C580,160 300,330 -60,230 C320,330 620,190 960,310" />
+          <path pathLength="1000" stroke-width="85" d="M-60,420 C340,330 580,500 960,400 C560,510 300,370 -60,490" />
+          <path pathLength="1000" stroke-width="85" d="M960,590 C600,510 300,680 -60,580 C340,680 620,540 960,660" />
+          <path pathLength="1000" stroke-width="85" d="M-60,770 C340,680 580,850 960,750 C560,860 300,720 -60,840" />
+          <path pathLength="1000" stroke-width="85" d="M960,940 C600,860 300,1030 -60,930 C340,1030 620,890 960,1010" />
+          <path pathLength="1000" stroke-width="90" d="M-60,1120 C340,1030 580,1190 960,1090 C560,1200 300,1080 -60,1170" />
+        </g>
+      </mask>
       <mask id="brush${i}" maskUnits="userSpaceOnUse">
         <rect width="900" height="1200" fill="#000" />
         <g class="strokes" fill="none" stroke="#fff" stroke-linecap="round">
@@ -72,6 +85,8 @@ function brushArt(i, url, name) {
         <rect class="mask-fill" width="900" height="1200" fill="#fff" opacity="0" />
       </mask>
     </defs>
+    <image class="slide__sketch" href="${url}" x="0" y="0" width="900" height="1200"
+           preserveAspectRatio="xMidYMid meet" mask="url(#sketch${i})" />
     <image href="${url}" x="0" y="0" width="900" height="1200"
            preserveAspectRatio="xMidYMid meet" mask="url(#brush${i})" />
   </svg>`;
@@ -139,8 +154,8 @@ function goTo(next) {
     heroVideo.pause();
   }
 
-  // lock until the paint-in finishes
-  setTimeout(() => (sweeping = false), 900);
+  // lock until the sketch + paint passes finish
+  setTimeout(() => (sweeping = false), 1400);
 }
 
 document.getElementById("nextBtn").addEventListener("click", () => goTo(current + 1));
@@ -169,9 +184,43 @@ if (!reducedMotion) {
 }
 
 /* ------------------------------------------------------------
-   Engineering media — exploded still (film lives in the hero)
+   Engineering media — exploded still with cycling spec callouts
    ------------------------------------------------------------ */
 document.getElementById("explodedImage").src = EXPLODED_IMAGE;
+
+const CALLOUTS = [
+  { x: 15, y: 48, t: "Sapphire crystal", s: "Double anti-reflective · 9H hardness" },
+  { x: 34, y: 40, t: "Openworked dial", s: "Hand-finished · gilded gear train" },
+  { x: 50, y: 40, t: "Mainspring barrel", s: "96-hour power reserve" },
+  { x: 58, y: 66, t: "Free-sprung balance", s: "28,800 vph · ±2 s/day" },
+  { x: 68, y: 46, t: "Gear train", s: "214 components · 31 jewels" },
+  { x: 85, y: 44, t: "Case middle", s: "Grade-5 titanium · 5 ATM" },
+];
+
+const calloutsEl = document.getElementById("callouts");
+CALLOUTS.forEach((c) => {
+  const el = document.createElement("div");
+  el.className = "callout" + (c.x > 62 ? " callout--flip" : "");
+  el.style.left = c.x + "%";
+  el.style.top = c.y + "%";
+  el.innerHTML = `
+    <span class="callout__dot"></span>
+    <span class="callout__stem"></span>
+    <span class="callout__label"><strong>${c.t}</strong><em>${c.s}</em></span>`;
+  calloutsEl.appendChild(el);
+});
+
+const calloutEls = [...calloutsEl.children];
+let calloutIdx = 0;
+calloutEls[0].classList.add("is-on");
+if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+  setInterval(() => {
+    if (document.hidden) return;
+    calloutEls[calloutIdx].classList.remove("is-on");
+    calloutIdx = (calloutIdx + 1) % calloutEls.length;
+    calloutEls[calloutIdx].classList.add("is-on");
+  }, 3200);
+}
 
 /* ------------------------------------------------------------
    Product detail — featured watch
@@ -183,11 +232,12 @@ document.getElementById("detailImage").alt = `KAIROS ${WATCHES[0].name}`;
    Collection grid
    ------------------------------------------------------------ */
 const grid = document.getElementById("watchGrid");
-WATCHES.forEach((w) => {
+WATCHES.forEach((w, i) => {
   const card = document.createElement("article");
   card.className = "watch-card reveal";
   card.innerHTML = `
-    <img src="${w.img}" alt="KAIROS ${w.name}" loading="lazy" />
+    <span class="watch-card__num">0${i + 1}</span>
+    <img src="${w.img}" alt="KAIROS ${w.name}" loading="lazy" style="animation-delay:${i * 1.1}s" />
     <h3>${w.name}</h3>
     <p>${w.spec}</p>
     <strong>${w.price}</strong>
