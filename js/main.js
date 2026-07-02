@@ -30,7 +30,7 @@ const WATCHES = [
     desc: "Machined from one billet of steel. No numerals, no noise — time reduced to its purest gesture.",
     price: "£7,200",
     name: "Monolith Steel",
-    img: `${CDN}/hf_20260702_133659_6963bf44-aba0-418c-b146-ebdad76a5711.png`,
+    img: `${CDN}/hf_20260702_140521_24b0504e-ee32-4663-b649-10ab60ea30ed.png`,
   },
   {
     collection: "Machina Collection",
@@ -53,8 +53,30 @@ const EXPLODED_POSTER = `${CDN}/hf_20260702_132346_fde47a2a-ddf5-45f6-ad86-cc280
    ------------------------------------------------------------ */
 const slidesEl = document.getElementById("slides");
 const dotsEl = document.getElementById("dots");
-const panelEl = document.getElementById("heroPanel");
 const idxEl = document.getElementById("slideIndex");
+/* brush-stroke mask — the watch is "painted" onto the stage stroke by stroke */
+function brushArt(i, url, name) {
+  return `
+  <svg class="slide__art" viewBox="0 0 900 1200" role="img" aria-label="KAIROS ${name}">
+    <defs>
+      <mask id="brush${i}" maskUnits="userSpaceOnUse">
+        <rect width="900" height="1200" fill="#000" />
+        <g class="strokes" fill="none" stroke="#fff" stroke-linecap="round">
+          <path pathLength="1000" stroke-width="200" d="M-60,110 C240,30 620,190 960,80" />
+          <path pathLength="1000" stroke-width="205" d="M960,300 C640,210 260,390 -60,290" />
+          <path pathLength="1000" stroke-width="205" d="M-60,490 C280,400 600,580 960,470" />
+          <path pathLength="1000" stroke-width="205" d="M960,680 C620,590 280,770 -60,670" />
+          <path pathLength="1000" stroke-width="205" d="M-60,870 C280,780 620,960 960,850" />
+          <path pathLength="1000" stroke-width="215" d="M960,1075 C620,985 280,1165 -60,1055" />
+        </g>
+        <rect class="mask-fill" width="900" height="1200" fill="#fff" opacity="0" />
+      </mask>
+    </defs>
+    <image href="${url}" x="0" y="0" width="900" height="1200"
+           preserveAspectRatio="xMidYMid meet" mask="url(#brush${i})" />
+  </svg>`;
+}
+
 WATCHES.forEach((w, i) => {
   const slide = document.createElement("article");
   slide.className = "slide" + (i === 0 ? " is-active" : "");
@@ -66,9 +88,7 @@ WATCHES.forEach((w, i) => {
       <p class="slide__desc">${w.desc}</p>
       <a class="slide__cta" href="#detail">Discover <i>→</i></a>
     </div>
-    <div class="slide__img-wrap">
-      <img src="${w.img}" alt="KAIROS ${w.name}" ${i === 0 ? "" : 'loading="lazy"'} />
-    </div>`;
+    <div class="slide__img-wrap">${brushArt(i, w.img, w.name)}</div>`;
   slidesEl.appendChild(slide);
 });
 
@@ -104,29 +124,23 @@ function goTo(next) {
   if (sweeping || next === current) return;
   sweeping = true;
 
-  // the right-to-left sweep panel, then swap content mid-sweep
-  panelEl.classList.add("is-sweeping");
-  setTimeout(() => {
-    slides[current].classList.remove("is-active");
-    dots[current].classList.remove("is-active");
-    current = (next + slides.length) % slides.length;
-    slides[current].classList.add("is-active");
-    dots[current].classList.add("is-active");
-    idxEl.textContent = String(current + 1).padStart(2, "0");
+  slides[current].classList.remove("is-active");
+  dots[current].classList.remove("is-active");
+  current = (next + slides.length) % slides.length;
+  slides[current].classList.add("is-active");
+  dots[current].classList.add("is-active");
+  idxEl.textContent = String(current + 1).padStart(2, "0");
 
-    // the film slide plays only while it is on stage
-    if (slides[current] === videoSlide) {
-      heroVideo.currentTime = 0;
-      heroVideo.play().catch(() => {});
-    } else {
-      heroVideo.pause();
-    }
-  }, 480);
+  // the film slide plays only while it is on stage
+  if (slides[current] === videoSlide) {
+    heroVideo.currentTime = 0;
+    heroVideo.play().catch(() => {});
+  } else {
+    heroVideo.pause();
+  }
 
-  panelEl.addEventListener("animationend", () => {
-    panelEl.classList.remove("is-sweeping");
-    sweeping = false;
-  }, { once: true });
+  // lock until the paint-in finishes
+  setTimeout(() => (sweeping = false), 900);
 }
 
 document.getElementById("nextBtn").addEventListener("click", () => goTo(current + 1));
@@ -155,27 +169,9 @@ if (!reducedMotion) {
 }
 
 /* ------------------------------------------------------------
-   Engineering media (exploded view)
+   Engineering media — exploded still (film lives in the hero)
    ------------------------------------------------------------ */
-const media = document.getElementById("explodedMedia");
-const video = document.getElementById("explodedVideo");
 document.getElementById("explodedImage").src = EXPLODED_IMAGE;
-
-if (EXPLODED_VIDEO) {
-  video.poster = EXPLODED_POSTER;
-  const src = document.createElement("source");
-  src.src = EXPLODED_VIDEO;
-  src.type = "video/mp4";
-  video.appendChild(src);
-  media.classList.add("has-video");
-
-  // play only while on screen
-  new IntersectionObserver(
-    (entries) =>
-      entries.forEach((en) => (en.isIntersecting ? video.play().catch(() => {}) : video.pause())),
-    { threshold: 0.35 }
-  ).observe(video);
-}
 
 /* ------------------------------------------------------------
    Product detail — featured watch
