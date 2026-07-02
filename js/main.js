@@ -12,7 +12,7 @@ const WATCHES = [
     desc: "The manufacture calibre laid bare. Golden gears and black bridges suspended behind sapphire — nothing hidden, nothing spared.",
     price: "£12,400",
     name: "Aperture Skeleton",
-    img: `${CDN}/hf_20260702_130604_97ac780f-2ccc-42dc-8e33-f3915ccbeca2.png`,
+    img: `${CDN}/hf_20260702_133652_f6e8f930-20a3-4b5b-b5e2-2287b941a07c.png`,
   },
   {
     collection: "Abyss Collection",
@@ -21,7 +21,7 @@ const WATCHES = [
     desc: "Built for the dark. A carbon cushion case, luminous sandwich dial and the crown bridge that became our signature.",
     price: "£9,800",
     name: "Abyss Carbon",
-    img: `${CDN}/hf_20260702_130607_7ca57ded-5fda-4c0d-90b3-aca3d591e70c.png`,
+    img: `${CDN}/hf_20260702_133653_12bd53e9-a01f-4ae1-ba67-4419296812c4.png`,
   },
   {
     collection: "Monolith Collection",
@@ -30,7 +30,7 @@ const WATCHES = [
     desc: "Machined from one billet of steel. No numerals, no noise — time reduced to its purest gesture.",
     price: "£7,200",
     name: "Monolith Steel",
-    img: `${CDN}/hf_20260702_130614_fb68b35d-556f-4a3b-885a-d3a8d769abcf.png`,
+    img: `${CDN}/hf_20260702_133659_6963bf44-aba0-418c-b146-ebdad76a5711.png`,
   },
   {
     collection: "Machina Collection",
@@ -39,7 +39,7 @@ const WATCHES = [
     desc: "A machine sculpture for the wrist. Suspended gear train, floating hour ring, crown at twelve. Horology, rebuilt.",
     price: "£15,900",
     name: "Machina Avant-Garde",
-    img: `${CDN}/hf_20260702_130615_340aaf35-ccba-4f72-b0d9-5dee3404025a.png`,
+    img: `${CDN}/hf_20260702_133701_45a89cdd-bdee-4dc1-b236-1192f0b77096.png`,
   },
 ];
 
@@ -55,8 +55,6 @@ const slidesEl = document.getElementById("slides");
 const dotsEl = document.getElementById("dots");
 const panelEl = document.getElementById("heroPanel");
 const idxEl = document.getElementById("slideIndex");
-document.getElementById("slideTotal").textContent = String(WATCHES.length).padStart(2, "0");
-
 WATCHES.forEach((w, i) => {
   const slide = document.createElement("article");
   slide.className = "slide" + (i === 0 ? " is-active" : "");
@@ -72,15 +70,32 @@ WATCHES.forEach((w, i) => {
       <img src="${w.img}" alt="KAIROS ${w.name}" ${i === 0 ? "" : 'loading="lazy"'} />
     </div>`;
   slidesEl.appendChild(slide);
+});
 
+/* final slide — the calibre burst film, full-bleed */
+const videoSlide = document.createElement("article");
+videoSlide.className = "slide slide--video";
+videoSlide.innerHTML = `
+  <video muted loop playsinline preload="metadata" poster="${EXPLODED_POSTER}">
+    <source src="${EXPLODED_VIDEO}" type="video/mp4" />
+  </video>
+  <div class="slide__copy slide__copy--video">
+    <p class="slide__collection">In-house Calibre K-01</p>
+    <h1 class="slide__title">Engineered<br />to defy time</h1>
+    <a class="slide__cta" href="#engineering">Discover <i>→</i></a>
+  </div>`;
+slidesEl.appendChild(videoSlide);
+const heroVideo = videoSlide.querySelector("video");
+
+const slides = [...slidesEl.children];
+document.getElementById("slideTotal").textContent = String(slides.length).padStart(2, "0");
+slides.forEach((s, i) => {
   const dot = document.createElement("button");
   dot.className = i === 0 ? "is-active" : "";
-  dot.setAttribute("aria-label", `Show ${w.name}`);
+  dot.setAttribute("aria-label", `Show slide ${i + 1}`);
   dot.addEventListener("click", () => goTo(i));
   dotsEl.appendChild(dot);
 });
-
-const slides = [...slidesEl.children];
 const dots = [...dotsEl.children];
 let current = 0;
 let sweeping = false;
@@ -94,10 +109,18 @@ function goTo(next) {
   setTimeout(() => {
     slides[current].classList.remove("is-active");
     dots[current].classList.remove("is-active");
-    current = (next + WATCHES.length) % WATCHES.length;
+    current = (next + slides.length) % slides.length;
     slides[current].classList.add("is-active");
     dots[current].classList.add("is-active");
     idxEl.textContent = String(current + 1).padStart(2, "0");
+
+    // the film slide plays only while it is on stage
+    if (slides[current] === videoSlide) {
+      heroVideo.currentTime = 0;
+      heroVideo.play().catch(() => {});
+    } else {
+      heroVideo.pause();
+    }
   }, 480);
 
   panelEl.addEventListener("animationend", () => {

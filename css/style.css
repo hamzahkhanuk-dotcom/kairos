@@ -238,6 +238,28 @@ img { max-width: 100%; display: block; }
   opacity: 1;
 }
 
+/* film slide — full-bleed calibre burst video */
+.slide--video { display: block; padding: 0; }
+.slide--video video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.slide--video::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(75deg, rgba(12,12,13,0.72) 0%, rgba(12,12,13,0.25) 45%, transparent 70%);
+}
+.slide__copy--video {
+  position: absolute;
+  left: clamp(1.2rem, 5vw, 4.5rem);
+  bottom: 7rem;
+  z-index: 2;
+}
+
 /* sweeping accent panel — the right-to-left swipe from the reference */
 .hero__panel {
   position: absolute;
