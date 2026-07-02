@@ -94,7 +94,7 @@ function brushArt(i, url, name) {
 
 WATCHES.forEach((w, i) => {
   const slide = document.createElement("article");
-  slide.className = "slide" + (i === 0 ? " is-active" : "");
+  slide.className = "slide"; // slide 1 activates after the intro curtain lifts
   slide.innerHTML = `
     <div class="slide__copy">
       <p class="slide__collection">${w.collection}</p>
@@ -126,7 +126,6 @@ const slides = [...slidesEl.children];
 document.getElementById("slideTotal").textContent = String(slides.length).padStart(2, "0");
 slides.forEach((s, i) => {
   const dot = document.createElement("button");
-  dot.className = i === 0 ? "is-active" : "";
   dot.setAttribute("aria-label", `Show slide ${i + 1}`);
   dot.addEventListener("click", () => goTo(i));
   dotsEl.appendChild(dot);
@@ -275,3 +274,36 @@ burger.addEventListener("click", () => nav.classList.toggle("is-open"));
 nav.querySelectorAll(".nav__links a").forEach((a) =>
   a.addEventListener("click", () => nav.classList.remove("is-open"))
 );
+
+/* ------------------------------------------------------------
+   Intro curtain — mark draws, wordmark spreads, curtain lifts.
+   Full show once per browser session; skipped for reduced motion.
+   ------------------------------------------------------------ */
+const intro = document.getElementById("intro");
+
+function startSite() {
+  slides[0].classList.add("is-active");
+  dots[0].classList.add("is-active");
+}
+
+let introSeen = false;
+try {
+  introSeen = sessionStorage.getItem("kairos-intro") === "1";
+} catch (e) { /* storage blocked — just play it */ }
+
+if (!intro || reducedMotion || introSeen) {
+  if (intro) intro.classList.add("is-removed");
+  startSite();
+} else {
+  document.body.classList.add("intro-locked");
+  intro.classList.add("is-playing");
+
+  setTimeout(() => {
+    intro.classList.add("is-done");        // curtain lifts
+    startSite();                           // hero paints in underneath
+    document.body.classList.remove("intro-locked");
+    try { sessionStorage.setItem("kairos-intro", "1"); } catch (e) {}
+  }, 2650);
+
+  intro.addEventListener("transitionend", () => intro.classList.add("is-removed"), { once: true });
+}

@@ -53,6 +53,92 @@ img { max-width: 100%; display: block; }
 }
 .display--light { color: var(--white); }
 
+/* ============ INTRO CURTAIN ============ */
+.intro {
+  position: fixed;
+  inset: 0;
+  z-index: 300;
+  background: var(--black);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.95s cubic-bezier(0.76, 0, 0.24, 1);
+}
+.intro.is-done { transform: translateY(-101%); }
+.intro.is-removed { display: none; }
+
+.intro__inner { text-align: center; }
+
+.intro__mark {
+  width: 76px;
+  height: 76px;
+  margin: 0 auto 1.6rem;
+  display: block;
+}
+.intro__mark path {
+  stroke-dasharray: 100;
+  stroke-dashoffset: 100;
+}
+.intro.is-playing .intro__mark path {
+  animation: introdraw 1.15s cubic-bezier(0.6, 0, 0.3, 1) 0.15s forwards;
+}
+@keyframes introdraw { to { stroke-dashoffset: 0; } }
+
+.intro__word {
+  font-family: var(--font-display);
+  font-variation-settings: "wdth" 125;
+  font-weight: 800;
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  color: var(--white);
+  letter-spacing: 0.34em;
+  margin-left: 0.34em; /* optically recentre the tracked text */
+}
+.intro__word span {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(18px);
+}
+.intro.is-playing .intro__word span {
+  animation: introletter 0.55s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+.intro.is-playing .intro__word span:nth-child(1) { animation-delay: 0.85s; }
+.intro.is-playing .intro__word span:nth-child(2) { animation-delay: 0.95s; }
+.intro.is-playing .intro__word span:nth-child(3) { animation-delay: 1.05s; }
+.intro.is-playing .intro__word span:nth-child(4) { animation-delay: 1.15s; }
+.intro.is-playing .intro__word span:nth-child(5) { animation-delay: 1.25s; }
+.intro.is-playing .intro__word span:nth-child(6) { animation-delay: 1.35s; }
+@keyframes introletter { to { opacity: 1; transform: translateY(0); } }
+
+.intro__line {
+  width: 0;
+  height: 1px;
+  margin: 1.3rem auto 1rem;
+  background: rgba(255, 255, 255, 0.55);
+}
+.intro.is-playing .intro__line {
+  animation: introline 0.7s cubic-bezier(0.6, 0, 0.3, 1) 1.55s forwards;
+}
+@keyframes introline { to { width: min(260px, 56vw); } }
+
+.intro__tag {
+  font-family: var(--font-display);
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.5em;
+  text-transform: uppercase;
+  color: #8f8f8c;
+  opacity: 0;
+}
+.intro.is-playing .intro__tag {
+  animation: introletter 0.6s ease 1.85s forwards;
+}
+
+body.intro-locked { overflow: hidden; }
+
+@media (prefers-reduced-motion: reduce) {
+  .intro { display: none; }
+}
+
 /* ============ NAV ============ */
 .nav {
   position: fixed;
