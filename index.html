@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>KAIROS — Haute Horlogerie</title>
+  <meta name="description" content="KAIROS. Mechanical watchmaking for the decisive moment. Discover the Aperture, Abyss, Monolith and Machina collections." />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230c0c0d'/%3E%3Cpath d='M25.19,8.28 A12,12 0 1 1 20.10,4.72' fill='none' stroke='%23ffffff' stroke-width='2.4'/%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,300..900&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css?v=7" />
+</head>
+<body>
+
+  <!-- ============ INTRO CURTAIN ============ -->
+  <div class="intro" id="intro" aria-hidden="true">
+    <div class="intro__inner">
+      <svg class="intro__mark" viewBox="0 0 48 48">
+        <path d="M38.55,11.78 A19,19 0 1 1 30.50,6.14" fill="none" stroke="#fff"
+              stroke-width="2.6" stroke-linecap="butt" pathLength="100" />
+      </svg>
+      <div class="intro__word">
+        <span>K</span><span>A</span><span>I</span><span>R</span><span>O</span><span>S</span>
+      </div>
+      <div class="intro__line"></div>
+      <p class="intro__tag">Haute Horlogerie</p>
+    </div>
+  </div>
+
+  <!-- ============ NAV ============ -->
+  <header class="nav" id="top">
+    <a class="nav__logo" href="#top">
+      <svg class="logo-mark" viewBox="0 0 48 48" aria-hidden="true">
+        <path d="M38.55,11.78 A19,19 0 1 1 30.50,6.14" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="butt" />
+      </svg>
+      KAIROS
+    </a>
+    <nav class="nav__links">
+      <a href="#collections">Collections</a>
+      <a href="#engineering">Engineering</a>
+      <a href="#detail">Boutique</a>
+      <a href="#craft">Maison</a>
+    </nav>
+    <div class="nav__icons">
+      <button aria-label="Search">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.8-3.8"/></svg>
+      </button>
+      <button aria-label="Wishlist">
+        <svg viewBox="0 0 24 24"><path d="M12 20.5C5 15.5 3 12 3 8.9 3 6.2 5.2 4 7.9 4c1.7 0 3.2.8 4.1 2.1C12.9 4.8 14.4 4 16.1 4 18.8 4 21 6.2 21 8.9c0 3.1-2 6.6-9 11.6z"/></svg>
+      </button>
+      <button aria-label="Account">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c1.5-3.5 4.5-5 8-5s6.5 1.5 8 5"/></svg>
+      </button>
+    </div>
+    <button class="nav__burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
+  </header>
+
+  <!-- ============ HERO CAROUSEL ============ -->
+  <section class="hero" id="collections">
+    <div class="hero__slides" id="slides"><!-- slides injected by JS --></div>
+
+    <div class="hero__ui">
+      <div class="hero__dots" id="dots"></div>
+      <div class="hero__arrows">
+        <button id="prevBtn" aria-label="Previous model">&#8249;</button>
+        <button id="nextBtn" aria-label="Next model">&#8250;</button>
+      </div>
+    </div>
+
+    <div class="hero__counter"><span id="slideIndex">01</span><i>/</i><span id="slideTotal">04</span></div>
+  </section>
+
+  <!-- ============ ENGINEERING / EXPLODED VIDEO ============ -->
+  <section class="engineering" id="engineering">
+    <div class="engineering__head">
+      <p class="eyebrow eyebrow--light reveal">In-house calibre K-01</p>
+      <h2 class="display display--light reveal">Engineered<br />to defy time.</h2>
+      <p class="engineering__copy reveal">
+        Two hundred and fourteen components. Assembled by hand,
+        regulated in five positions. Every KAIROS movement is a
+        machine built to outlive its maker.
+      </p>
+    </div>
+    <div class="engineering__media reveal" id="explodedMedia">
+      <i class="corner corner--tl"></i><i class="corner corner--tr"></i>
+      <i class="corner corner--bl"></i><i class="corner corner--br"></i>
+      <img id="explodedImage" alt="Exploded view of the KAIROS K-01 calibre" loading="lazy" />
+      <div class="callouts" id="callouts"></div>
+    </div>
+  </section>
+
+  <!-- ============ PRODUCT DETAIL SPLIT ============ -->
+  <section class="detail" id="detail">
+    <div class="detail__visual">
+      <img src="" alt="" id="detailImage" loading="lazy" />
+      <div class="detail__visual-tools">
+        <button aria-label="Zoom">⤢</button>
+        <button aria-label="Rotate">↻</button>
+      </div>
+    </div>
+    <div class="detail__info">
+      <p class="eyebrow reveal">Aperture Collection</p>
+      <h2 class="detail__title reveal">Aperture<br />Skeleton</h2>
+      <p class="detail__ref reveal">42&nbsp;MM · GRADE-5 TITANIUM · REF. KAI-0142T</p>
+
+      <div class="detail__row-group reveal">
+        <div class="detail__meta">
+          <button class="detail__meta-btn">♡ Add to wishlist</button>
+          <button class="detail__meta-btn">↗ Share</button>
+        </div>
+        <div class="detail__buy">
+          <button class="detail__cta">Add to bag</button>
+          <p class="detail__price">£12,400<span>incl. sales tax</span></p>
+        </div>
+      </div>
+
+      <ul class="detail__links">
+        <li class="reveal"><a href="#"><i>ⓘ</i> Technical details</a></li>
+        <li class="reveal"><a href="#"><i>◎</i> Find your nearest boutique</a></li>
+        <li class="reveal"><a href="#"><i>▤</i> Make an appointment</a></li>
+        <li class="reveal"><a href="#"><i>✦</i> Product warranty — 8 years</a></li>
+        <li class="reveal"><a href="#"><i>↓</i> Download instruction</a></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============ COLLECTION GRID ============ -->
+  <section class="grid-section" id="craft">
+    <p class="eyebrow reveal">The Collections</p>
+    <h2 class="display reveal">Four expressions.<br />One obsession.</h2>
+    <div class="watch-grid" id="watchGrid"><!-- cards injected by JS --></div>
+  </section>
+
+  <!-- ============ MANIFESTO ============ -->
+  <section class="manifesto">
+    <p class="manifesto__text reveal">
+      “Kairos — the ancient Greek word for the fleeting instant
+      in which everything changes. We build the machines
+      that let you <em>recognise it</em>.”
+    </p>
+    <p class="manifesto__mark reveal">
+      <svg class="logo-mark logo-mark--manifesto" viewBox="0 0 48 48" aria-hidden="true">
+        <path d="M38.55,11.78 A19,19 0 1 1 30.50,6.14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="butt" />
+      </svg>
+    </p>
+    <p class="manifesto__sign reveal">— The KAIROS Manufacture</p>
+  </section>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="footer">
+    <div class="footer__top">
+      <div class="footer__brand">
+        <svg class="logo-mark logo-mark--lg" viewBox="0 0 48 48" aria-hidden="true">
+          <path d="M38.55,11.78 A19,19 0 1 1 30.50,6.14" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="butt" />
+        </svg>
+        KAIROS
+      </div>
+      <div class="footer__cols">
+        <div>
+          <h4>Collections</h4>
+          <a href="#collections">Aperture</a>
+          <a href="#collections">Abyss</a>
+          <a href="#collections">Monolith</a>
+          <a href="#collections">Machina</a>
+        </div>
+        <div>
+          <h4>Maison</h4>
+          <a href="#craft">Manufacture</a>
+          <a href="#engineering">Movements</a>
+          <a href="#">Heritage</a>
+        </div>
+        <div>
+          <h4>Services</h4>
+          <a href="#">Care &amp; warranty</a>
+          <a href="#">Boutiques</a>
+          <a href="#">Contact</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <p>© 2026 KAIROS Manufacture. Concept design.</p>
+      <p>Geneva · London · Tokyo</p>
+    </div>
+  </footer>
+
+  <script src="js/main.js?v=7"></script>
+</body>
+</html>
